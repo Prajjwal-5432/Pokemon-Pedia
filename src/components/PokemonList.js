@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
-const PokemonList = ({ pokemons, onSelect, selected }) => {
+const PokemonList = ({ onSelect, selected }) => {
+  const pokemons = useSelector((state) => state.pokemon.pokemon);
+
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 10;
 
@@ -19,10 +22,7 @@ const PokemonList = ({ pokemons, onSelect, selected }) => {
   const handleSelectPokemon = (index) => {
     if (selected === index) {
       // If the selected Pokémon is clicked again, unselect it and select a random one
-      let randomIndex;
-      do {
-        randomIndex = Math.floor(Math.random() * pokemons.length);
-      } while (randomIndex === selected);
+      let randomIndex = Math.floor(Math.random() * pokemons.length);
       onSelect(randomIndex);
     } else {
       onSelect(index);
@@ -72,6 +72,9 @@ const PokemonList = ({ pokemons, onSelect, selected }) => {
         >
           Previous
         </button>
+        <div className="px-4 py-2 bg-indigo-500 text-white rounded disabled:bg-gray-300">
+          {currentPage + 1}
+        </div>
         <button
           onClick={handleNextPage}
           disabled={(currentPage + 1) * itemsPerPage >= pokemons.length}

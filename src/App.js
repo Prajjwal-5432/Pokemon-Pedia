@@ -1,10 +1,10 @@
 import "./App.css";
-import Pokemons from "./components/Pokemon";
+import Pokemon from "./components/Pokemon";
 
 function App() {
   return (
     <div className="App">
-      <Pokemons />
+      <Pokemon />
     </div>
   );
 }
